@@ -1,0 +1,25 @@
+package:
+  name: pyepr
+  version: 0.8.1
+
+source:
+  fn: pyepr-0.8.1.tar.gz
+  url: https://pypi.python.org/packages/source/p/pyepr/pyepr-0.8.1.tar.gz
+  md5: c83ed5bbb8f8a58f22990a0758902f71
+
+requirements:
+  build:
+    - python
+    - numpy
+    - cython
+  run:
+    - python
+    - numpy
+
+test:
+  imports:
+    - epr
+
+about:
+  home: http://avalentino.github.com/pyepr
+  license: GPL3
