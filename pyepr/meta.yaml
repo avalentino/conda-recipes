@@ -16,6 +16,9 @@ requirements:
     - python
     - numpy
 
+build:
+  number: 1
+
 test:
   imports:
     - epr
@@ -23,3 +26,4 @@ test:
 about:
   home: http://avalentino.github.com/pyepr
   license: GPL3
+  summary: Python ENVISAT Product Reader API
