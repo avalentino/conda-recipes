@@ -20,6 +20,8 @@ requirements:
 #  number: 0
 
 test:
+  files:
+    - MER_LRC_2PTGMV20000620_104318_00000104X000_00000_00000_0001.N1
   imports:
     - epr
 
@@ -27,3 +29,4 @@ about:
   home: http://avalentino.github.com/pyepr
   license: GPL3
   summary: Python ENVISAT Product Reader API
+
