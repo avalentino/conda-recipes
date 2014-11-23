@@ -2,7 +2,6 @@ package: pyepr
 platform:
   - linux-32
   - linux-64
-  - osx-32
   - osx-64
   - win-32
   - win-64
