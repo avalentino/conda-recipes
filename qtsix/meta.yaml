@@ -1,0 +1,30 @@
+package:
+  name: qtsix
+  version: !!str 1.1
+
+source:
+  fn: qtsix-1.1.tar.gz
+  url: https://pypi.python.org/packages/source/q/qtsix/qtsix-1.1.tar.gz
+  md5: e9056d16c7d42d6f4276624b3215575b
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+
+test:
+  # Python imports
+  imports:
+    - qtsix
+
+  requires:
+    - pyqt
+
+about:
+  home: https://github.com/avalentino/qtsix
+  license:  BSD License
+  summary: 'Compatibility layer for different Qt bindings.'
