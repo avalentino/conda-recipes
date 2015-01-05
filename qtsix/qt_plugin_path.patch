@@ -1,0 +1,34 @@
+diff --git qtsix/__init__.py qtsix/__init__.py
+index bd01b23..7882ef2 100644
+--- qtsix/__init__.py
++++ qtsix/__init__.py
+@@ -34,6 +34,29 @@
+ import os
+ 
+ 
++def set_conda_qt_plugins():
++    import sys
++
++    if 'QT_PLUGIN_PATH' not in os.environ:
++        if sys.platform.lower().startswith('win'):
++            for pkg in ('PyQt4', 'PySide'):
++                qt_plugin_path = os.path.join(
++                    sys.prefix, 'Lib', 'site-packages', pkg, 'plugins')
++                if os.path.exists(qt_plugin_path):
++                    break
++            else:
++                qt_plugin_path = None
++        else:
++            # linux and darwin
++            qt_plugin_path = os.path.join(sys.prefix, 'plugins')
++
++        if qt_plugin_path:
++            os.environ['QT_PLUGIN_PATH'] = qt_plugin_path
++
++
++set_conda_qt_plugins()
++
++
+ def prepare_pyqt4():
+     # Set API version 2 (compatible with both PyQt5 and PySide)
+     import sip
