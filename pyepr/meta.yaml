@@ -1,11 +1,11 @@
 package:
   name: pyepr
-  version: 0.8.2
+  version: 0.9.2
 
 source:
-  fn: pyepr-0.8.2.tar.gz
-  url: https://pypi.python.org/packages/source/p/pyepr/pyepr-0.8.2.tar.gz
-  md5: afb7a0c8351c1b903a59cff3883c82db
+  fn: pyepr-0.9.2.tar.gz
+  url: https://pypi.python.org/packages/source/p/pyepr/pyepr-0.9.2.tar.gz
+  md5: 18d5e73acaa1cef408de0b1614b7a186
 
 requirements:
   build:
@@ -20,8 +20,6 @@ requirements:
 #  number: 0
 
 test:
-  files:
-    - MER_LRC_2PTGMV20000620_104318_00000104X000_00000_00000_0001.N1
   imports:
     - epr
 
