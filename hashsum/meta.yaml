@@ -31,6 +31,7 @@ requirements:
   build:
     - python
     - setuptools
+    - enum34 # [not (py34 or py35)]
 
   run:
     - python
