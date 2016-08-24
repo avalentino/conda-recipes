@@ -1,11 +1,11 @@
 package:
   name: hashsum
-  version: "1.1.1"
+  version: "1.2.1"
 
 source:
-  fn: hashsum-1.1.1.tar.gz
-  url: https://pypi.python.org/packages/source/h/hashsum/hashsum-1.1.1.tar.gz
-  md5: acbd54e9bbeca32f83ce1d0aa2d70108
+  fn: hashsum-1.2.1.tar.gz
+  url: https://pypi.org/packages/source/h/hashsum/hashsum-1.2.1.tar.gz
+  md5: 3e0b31b403273c43544bc507bfd8b29c
 #  patches:
    # List any patch files here
    # - fix.patch
