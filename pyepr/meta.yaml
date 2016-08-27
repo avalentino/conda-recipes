@@ -1,23 +1,32 @@
+# Note: there are many handy hints in comments in this example -- remove them when you've finalized your recipe
+
+# Jinja variables help maintain the recipe as you'll update the version only here.
+{% set name = "pyepr" %}
+{% set version = "0.9.3" %}
+{% set sha256 = "6a2b42694e9a29a147fac54b1d0b3a3e9c67f3543f7f2f12b5d859048d8355ec" %}
+
 package:
-  name: pyepr
-  version: 0.9.3
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  fn: pyepr-0.9.3.tar.gz
-  url: https://pypi.python.org/packages/source/p/pyepr/pyepr-0.9.3.tar.gz
-  md5: de274a94f8a2c44227e85a515af32291
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
   build:
     - python
+    - setuptools
     - numpy
     - cython
   run:
     - python
     - numpy
-
-#build:
-#  number: 0
 
 test:
   imports:
@@ -25,6 +34,23 @@ test:
 
 about:
   home: http://avalentino.github.com/pyepr
-  license: GPL3
-  summary: Python ENVISAT Product Reader API
+  license: GPL-3.0
+  license_file: LICENSE.txt
+  summary: 'Python ENVISAT Product Reader API'
 
+  # The remaining entries in this section are optional, but recommended
+  description: |
+    PyEPR provides Python bindings for the ENVISAT Product Reader C API
+    (EPR API) for reading satellite data from ENVISAT ESA (European Space
+    Agency) mission.
+    PyEPR, as well as the EPR API for C, supports ENVISAT MERIS, AATSR
+    Level 1B and Level 2 and also ASAR data products. It provides access to
+    the data either on a geophysical (decoded, ready-to-use pixel samples)
+    or on a raw data layer. The raw data access makes it possible to read
+    any data field contained in a product file.
+  doc_url: http://avalentino.github.io/pyepr/html/index.html
+  dev_url: https://github.com/avalentino/pyepr
+
+extra:
+  recipe-maintainers:
+    - avalentino

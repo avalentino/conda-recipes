@@ -1,64 +1,51 @@
+# Note: there are many handy hints in comments in this example -- remove them when you've finalized your recipe
+
+# Jinja variables help maintain the recipe as you'll update the version only here.
+{% set name = "hashsum" %}
+{% set version = "1.2.1" %}
+{% set sha256 = "cd0259e316c71b078a46129a2c1ba508e341653bd664a7e37dc20688ccc4d1a7" %}
+
 package:
-  name: hashsum
-  version: "1.2.1"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  fn: hashsum-1.2.1.tar.gz
-  url: https://pypi.org/packages/source/h/hashsum/hashsum-1.2.1.tar.gz
-  md5: 3e0b31b403273c43544bc507bfd8b29c
-#  patches:
-   # List any patch files here
-   # - fix.patch
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
 
 build:
-  # noarch_python: True
-  # preserve_egg_dir: True
-  entry_points:
-    # Put any entry points (scripts to be generated automatically) here. The
-    # syntax is module:function.  For example
-    #
-    # - hashsum = hashsum:main
-    #
-    # Would create an entry point called hashsum that calls hashsum.main()
-
-    - hashsum=hashsum:main
-
-  # If this is a new build for the same version, increment the build
-  # number. If you do not include this key, it defaults to 0.
-  # number: 1
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
   build:
     - python
     - setuptools
     - enum34 # [not (py34 or py35)]
-
   run:
     - python
     - enum34 # [not (py34 or py35)]
 
 test:
-  # Python imports
-  # imports:
+  imports:
+    - hashsum
 
   commands:
-    # You can put test commands to be run here.  Use this to test that the
-    # entry points work.
-
     - hashsum --help
-
-  # You can also put a file called run_test.py in the recipe that will be run
-  # at test time.
-
-  # requires:
-    # Put any additional test requirements here.  For example
-    # - nose
 
 about:
   home: https://github.com/avalentino/hashsum
-  license: BSD License
+  license: BSD
+  license_file: LICENSE.txt
   summary: 'Python drop-in replacement for md5sum and co.'
+  description: |
+    The hashsum package provides a command line tool for hash-sum
+    computation and check. It can use different algorithms and it
+    is compatible with related GNU utilities.
+  doc_url: https://github.com/avalentino/hashsum
+  dev_url: https://github.com/avalentino/hashsum
 
-# See
-# http://docs.continuum.io/conda/build.html for
-# more information about meta.yaml
+extra:
+  recipe-maintainers:
+    - avalentino
