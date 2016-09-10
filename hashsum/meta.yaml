@@ -28,6 +28,8 @@ requirements:
     - enum34 # [not (py34 or py35)]
 
 test:
+  source_files:
+    - tests
   imports:
     - hashsum
 
