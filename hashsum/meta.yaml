@@ -2,8 +2,8 @@
 
 # Jinja variables help maintain the recipe as you'll update the version only here.
 {% set name = "hashsum" %}
-{% set version = "1.2.1" %}
-{% set sha256 = "cd0259e316c71b078a46129a2c1ba508e341653bd664a7e37dc20688ccc4d1a7" %}
+{% set version = "1.2.2" %}
+{% set sha256 = "4790dbde51bf519e3004c98ab55a6f5b3fbb811016ac788386f7033eb0def08f" %}
 
 package:
   name: {{ name|lower }}
