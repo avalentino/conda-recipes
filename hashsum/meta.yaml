@@ -15,17 +15,17 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
   build:
     - python
     - setuptools
-    - enum34 # [not (py34 or py35)]
+    - enum34 # [not (py34 or py35 or py36)]
   run:
     - python
-    - enum34 # [not (py34 or py35)]
+    - enum34 # [not (py34 or py35 or py36)]
 
 test:
   source_files:
