@@ -2,31 +2,33 @@
 
 # Jinja variables help maintain the recipe as you'll update the version only here.
 {% set name = "pyepr" %}
-{% set version = "0.9.3" %}
-{% set sha256 = "6a2b42694e9a29a147fac54b1d0b3a3e9c67f3543f7f2f12b5d859048d8355ec" %}
+{% set version = "0.9.5" %}
+{% set sha256 = "87591cdfcb5c5534abf5a51b5f8d50ef7654eb83c81aaa57ca8999803613d64a" %}
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
   number: 0
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 requirements:
   build:
+    - {{ compiler('c') }}
+  host:
     - python
     - setuptools
-    - numpy
+    - pip
+    - numpy >=1.5
     - cython
   run:
     - python
-    - numpy
+    - numpy >=1.5
 
 test:
   source_files:
@@ -37,6 +39,7 @@ test:
 about:
   home: http://avalentino.github.com/pyepr
   license: GPL-3.0
+  license_family: LGPL
   license_file: LICENSE.txt
   summary: 'Python ENVISAT Product Reader API'
 
@@ -56,3 +59,5 @@ about:
 extra:
   recipe-maintainers:
     - avalentino
+
+# conda build --output-folder output --python 3.6 pyepr
