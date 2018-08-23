@@ -31,6 +31,8 @@ requirements:
     - numpy >=1.5
 
 test:
+  requires:
+    - unittest2  # [py2k]
   source_files:
     - tests/test_all.py
   imports:
