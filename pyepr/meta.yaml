@@ -2,8 +2,7 @@
 
 # Jinja variables help maintain the recipe as you'll update the version only here.
 {% set name = "pyepr" %}
-{% set version = "0.9.5" %}
-{% set sha256 = "87591cdfcb5c5534abf5a51b5f8d50ef7654eb83c81aaa57ca8999803613d64a" %}
+{% set version = "1.0.0" %}
 
 package:
   name: "{{ name|lower }}"
@@ -11,7 +10,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 72a2044ffcd570a17441d72d625f743b7c962b571b505eab831dcfc1b216f82a
 
 build:
   number: 0
@@ -24,11 +23,11 @@ requirements:
     - python
     - setuptools
     - pip
-    - numpy >=1.5
+    - numpy >=1.7
     - cython
   run:
     - python
-    - numpy >=1.5
+    - numpy >=1.7
 
 test:
   requires:
@@ -62,4 +61,4 @@ extra:
   recipe-maintainers:
     - avalentino
 
-# conda build --output-folder output --python 3.6 pyepr
+# conda build --output-folder output --python 3.7 pyepr
