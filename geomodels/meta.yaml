@@ -58,4 +58,4 @@ extra:
   recipe-maintainers:
     - avalentino
 
-# conda build -c saedrna --output-folder output --python 3.8 geomodels
+# conda build --output-folder output --python 3.8 geomodels
