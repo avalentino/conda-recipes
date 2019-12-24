@@ -1,0 +1,61 @@
+{% set name = "geomodels" %}
+{% set version = "1.0.0b3" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 7a1f19c30624266345c2188f8fb08bb4d01a7a1b4839a3e54bc2706cc0df6a76
+
+build:
+  number: 0
+  entry_points:
+    - geomodels-download = geomodels.__main__:main
+  script:
+    - make geographiclib-static
+    - env CPPFLAGS="-I${PWD}/GeographicLib-1.50.1/include"
+      LDFLAGS="-L${PWD}/GeographicLib-1.50.1/src"
+      {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - python
+    - cython
+    - setuptools
+  run:
+    - numpy
+    - python
+    - tqdm
+    - argcomplete
+
+test:
+  requires:
+    - pytest
+  imports:
+    - geomodels
+    - geomodels.test
+  commands:
+    - geomodels-download --help
+    - geomodels-download -d data recommended
+    - python -c "from geomodels.test import print_versions; print_versions()"
+    - env GEOGRAPHICLIB_DATA=./data python -m pytest --pyargs geomodels
+
+about:
+  home: "https://github.com/avalentino/geomodels"
+  license: MIT
+  license_family: MIT
+  license_file:
+  summary: "Python package for Earth data models management"
+  doc_url:
+  dev_url:
+
+extra:
+  recipe-maintainers:
+    - avalentino
+
+# conda build -c saedrna --output-folder output --python 3.8 geomodels
