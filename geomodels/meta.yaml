@@ -1,5 +1,5 @@
 {% set name = "geomodels" %}
-{% set version = "1.0.0b3" %}
+{% set version = "1.0.0b4" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,17 +7,15 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 7a1f19c30624266345c2188f8fb08bb4d01a7a1b4839a3e54bc2706cc0df6a76
+  sha256: 9f15635b3c58d33584843f004aa48cdd813f8eb25b2f6e69c17b735140fbeb3c
 
 build:
   number: 0
   entry_points:
-    - geomodels-download = geomodels.__main__:main
+    - geomodels-cli = geomodels.__main__:main
   script:
-    - make geographiclib-static
-    - env CPPFLAGS="-I${PWD}/GeographicLib-1.50.1/include"
-      LDFLAGS="-L${PWD}/GeographicLib-1.50.1/src"
-      {{ PYTHON }} -m pip install . -vv
+    - make embed
+    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -30,6 +28,7 @@ requirements:
   run:
     - numpy
     - python
+    - dataclasses  # [py<37]
     - tqdm
     - argcomplete
 
@@ -38,11 +37,11 @@ test:
     - pytest
   imports:
     - geomodels
-    - geomodels.test
+    - geomodels.tests
   commands:
-    - geomodels-download --help
-    - geomodels-download -d data recommended
-    - python -c "from geomodels.test import print_versions; print_versions()"
+    - geomodels-cli --help
+    - geomodels-cli install-data -d data recommended
+    - python -m geomodels info
     - env GEOGRAPHICLIB_DATA=./data python -m pytest --pyargs geomodels
 
 about:
