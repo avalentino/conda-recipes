@@ -1,6 +1,3 @@
-# Note: there are many handy hints in comments in this example -- remove them when you've finalized your recipe
-
-# Jinja variables help maintain the recipe as you'll update the version only here.
 {% set name = "pyepr" %}
 {% set version = "1.0.0" %}
 
@@ -38,13 +35,14 @@ test:
     - epr
 
 about:
-  home: http://avalentino.github.com/pyepr
+  home: https://avalentino.github.com/pyepr
   license: GPL-3.0
-  license_family: LGPL
-  license_file: LICENSE.txt
+  license_family: GPL
+  license_file:
+    - LICENSE.txt
+    - LICENSES/epr-api.txt
   summary: 'Python ENVISAT Product Reader API'
 
-  # The remaining entries in this section are optional, but recommended
   description: |
     PyEPR provides Python bindings for the ENVISAT Product Reader C API
     (EPR API) for reading satellite data from ENVISAT ESA (European Space
@@ -54,7 +52,7 @@ about:
     the data either on a geophysical (decoded, ready-to-use pixel samples)
     or on a raw data layer. The raw data access makes it possible to read
     any data field contained in a product file.
-  doc_url: http://avalentino.github.io/pyepr/html/index.html
+  doc_url: https://avalentino.github.io/pyepr/html/index.html
   dev_url: https://github.com/avalentino/pyepr
 
 extra:
