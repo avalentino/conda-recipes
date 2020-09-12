@@ -1,0 +1,72 @@
+{% set name = "s1etad" %}
+{% set version = "0.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 982438ac977740864429d1bccb5a225c77afdc1360c8a180bea1ebadf01b91fb
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - numpy
+    - scipy
+    - lxml
+    - netCDF4
+    - pandas
+    - python-dateutil
+    - shapely
+    - simplekml
+
+test:
+  imports:
+    - s1etad
+
+about:
+  home: https://gitlab.com/nuno.miranda/s1-etad
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  summary: 'Reader for Sentinel-1 Extended Timing Annotation Dataset'
+  description: |
+    The s1etad Python package provides tools for easy access to
+    Sentinel-1 Extended Timing Annotation Datasets.
+
+    The current version of the package is based on the Product Format
+    Specification Document (ETAD-DLR-PS-0014) Issue 1.1.
+
+    Main features provided are:
+
+    * open and navigate all the S1-ETAD elements:
+
+      - product (Sentinel1Etad class)
+      - swaths (Sentinel1EtadSwath class)
+      - bursts (Sentinel1EtadBurst class)
+
+    * inspect metadata
+    * perform queries on bursts (by time, swath name, product name or any
+      combination) using the Sentinel1Etad.burst_catalogue
+    * easy iteration
+    * read corrections
+    * perform correction mosaic: de-bursting and swath stitching (a basic
+      algorithm is currently implemented)
+    * get footprints
+    * generate simple KML files of the product
+    * integration with Jupyter_ environments
+  doc_url: https://s1etad.readthedocs.io/
+  dev_url: https://gitlab.com/nuno.miranda/s1-etad
+
+extra:
+  recipe-maintainers:
+    - avalentino
