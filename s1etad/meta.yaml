@@ -1,5 +1,5 @@
 {% set name = "s1etad" %}
-{% set version = "0.2.0" %}
+{% set version = "0.3.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 982438ac977740864429d1bccb5a225c77afdc1360c8a180bea1ebadf01b91fb
+  sha256: 588f637e33091bce909058ba2fc178ca80a4b9988574e06e9fc70a0b69a6f942
 
 build:
   noarch: python
@@ -25,9 +25,11 @@ requirements:
     - lxml
     - netCDF4
     - pandas
-    - python-dateutil
     - shapely
     - simplekml
+    - gdal
+    - matplotlib
+    - argcomplete
 
 test:
   imports:
