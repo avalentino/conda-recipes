@@ -1,0 +1,65 @@
+{% set name = "bpack" %}
+{% set version = "0.7.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: bd8381ed3e809e838d797e7ce8e98ac74af0420bde9276a7289a49362e70972f
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python >=3.7
+    - pip
+  run:
+    - python >=3.7
+    - typing-extensions # [py<39]
+    - bitstruct
+    - numpy
+
+test:
+  imports:
+    - bpack
+  commands:
+      - PYTHON -m pytest --pyargs bpack
+  requires:
+    - pytest
+
+about:
+  home: https://github.com/avalentino/bpack
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: 'Binary data structures (un-)packing library'
+  description: |
+    The bpack Python package provides tools to describe and encode/decode
+    binary data.
+
+    Binary data are assumed to be organized in *records*, each composed by a
+    sequence of fields. Fields are characterized by a known size, offset
+    (w.r.t. the beginning of the record) and datatype.
+
+    The package provides classes and functions that can be used to:
+
+    * describe binary data structures in a declarative way (structures can
+      be specified up to the bit level)
+    * automatically generate encoders/decoders for a specified data descriptor
+
+    Encoders/decoders (*backends*) rely on well known Python packages like:
+
+    * struct (form the standard library)
+    * bitstruct (optional)
+    * numpy (optional)
+    * bitarray (optional) - partial implementation
+  doc_url: https://bpack.readthedocs.io/
+  dev_url: https://github.com/avalentino/bpack
+
+extra:
+  recipe-maintainers:
+    - avalentino
