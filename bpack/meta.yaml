@@ -1,5 +1,5 @@
 {% set name = "bpack" %}
-{% set version = "0.7.0" %}
+{% set version = "0.7.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: bd8381ed3e809e838d797e7ce8e98ac74af0420bde9276a7289a49362e70972f
+  sha256: df81dcc937e60ec11e5d3f3ff9ec1d9573b91f43be5e332b627d99a8c28a5fde
 
 build:
   noarch: python
