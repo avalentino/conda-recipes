@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
@@ -28,7 +28,7 @@ test:
   imports:
     - bpack
   commands:
-      - PYTHON -m pytest --pyargs bpack
+      - python -m pytest --pyargs bpack
   requires:
     - pytest
 
