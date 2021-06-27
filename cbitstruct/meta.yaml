@@ -1,0 +1,50 @@
+{% set name = "cbitstruct" %}
+{% set version = "1.0.7" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 866605e194b68fe160f9dc9ac24d97987b6a2b9c5def94758982345009658244
+
+build:
+  number: 0
+  script:
+    - {{ PYTHON }} -m pip install . --no-deps -vv
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python
+
+test:
+  requires:
+    - pytest
+    - bitstruct
+  imports:
+    - cbitstruct
+  commands:
+    - python -m pytest --pyargs cbitstruct
+
+about:
+  home: https://github.com/qchateau/cbitstruct
+  license: MPL-2.0
+  license_file: LICENSE.md
+  summary: "C implementation of the bitstruct library."
+  description: |
+    cbitstruct is intended to have a similar interface as the python
+    struct module, but working on bits instead of primitive data types
+    (char, int, ...).
+  doc_url: https://bitstruct.readthedocs.io
+  dev_url: https://github.com/qchateau/cbitstruct
+
+extra:
+  recipe-maintainers:
+    - avalentino
