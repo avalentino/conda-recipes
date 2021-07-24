@@ -1,40 +1,37 @@
-# Note: there are many handy hints in comments in this example -- remove them when you've finalized your recipe
-
-# Jinja variables help maintain the recipe as you'll update the version only here.
-{% set name = "hashsum" %}
-{% set version = "1.2.2" %}
-{% set sha256 = "4790dbde51bf519e3004c98ab55a6f5b3fbb811016ac788386f7033eb0def08f" %}
+{% set version = "1.4.1" %}
 
 package:
-  name: {{ name|lower }}
+  name: hashsum
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://pypi.io/packages/source/h/hashsum/hashsum-{{ version }}.tar.gz
+  sha256: 2c40505ab82578651f9875241c48d03a1149c36eabd858907b7f3ab047a8c5e7
 
 build:
-  number: 1
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  noarch: python
+  number: 0
+  script: python -m pip install --no-deps --ignore-installed .
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
-    - enum34 # [not (py34 or py35 or py36)]
+    - pip
   run:
     - python
-    - enum34 # [not (py34 or py35 or py36)]
+    - argcomplete
 
 test:
+  requires:
+    - pytest
   source_files:
     - tests
   imports:
     - hashsum
-
   commands:
     - hashsum --help
+    - python -m pytest -v -p no:warnings -p no:logging
 
 about:
   home: https://github.com/avalentino/hashsum
@@ -47,6 +44,7 @@ about:
     is compatible with related GNU utilities.
   doc_url: https://github.com/avalentino/hashsum
   dev_url: https://github.com/avalentino/hashsum
+  doc_source_url: https://github.com/avalentino/hashsum/blob/master/README.rst
 
 extra:
   recipe-maintainers:
