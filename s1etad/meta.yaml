@@ -37,7 +37,7 @@ test:
     - s1etad
 
 about:
-  home: https://gitlab.com/nuno.miranda/s1-etad
+  home: https://gitlab.com/s1-etad/s1-etad
   license: MIT
   license_family: MIT
   license_file: LICENSE.txt
@@ -68,7 +68,7 @@ about:
     * generate simple KML files of the product
     * integration with Jupyter_ environments
   doc_url: https://s1etad.readthedocs.io/
-  dev_url: https://gitlab.com/nuno.miranda/s1-etad
+  dev_url: https://gitlab.com/s1-etad/s1-etad
 
 extra:
   recipe-maintainers:
