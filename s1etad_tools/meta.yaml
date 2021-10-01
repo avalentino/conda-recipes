@@ -1,0 +1,46 @@
+{% set name = "s1etad_tools" %}
+{% set version = "0.8.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://gitlab.com/s1-etad/sandbox-etad-slc-correction.git
+  git_rev: v0.8.0
+  # git_depth: 1 # (Defaults to -1/not shallow)
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - numpy
+    - scipy
+    - lxml
+    - gdal
+    - s1etad
+    - argcomplete
+
+test:
+  imports:
+    - s1etad_tools
+
+about:
+  home: https://gitlab.com/s1-etad/sandbox-etad-slc-correction
+  summary: 'S1-ETAD Tools'
+  description: |
+    Experimental utility modules and programs to support the adoption
+    of the Copernicus Sentinel-1 Extended Timing Annotation Dataset
+    (S1-ETAD).
+  dev_url: https://gitlab.com/s1-etad/sandbox-etad-slc-correction
+
+extra:
+  recipe-maintainers:
+    - avalentino
