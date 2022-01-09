@@ -1,0 +1,50 @@
+{% set name = "httpio" %}
+{% set version = "0.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 38dafc07874b5033499af9f1465e2b31f93e6934c52effa76d43695a98af1ae8
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python >=3.6
+    - requests >=2.10.0
+    - six
+    - aiohttp
+
+test:
+  imports:
+    - httpio
+
+about:
+  home: https://github.com/barneygale/httpio
+  license: MIT
+  license_file: COPYING.txt
+  summary: 'Python library for reading HTTP resources as random-access file-like objects'
+  description: |
+    HTTP resources as random-access file-like objects.
+
+    httpio is a small Python library that allows you to access files served
+    over HTTP as file-like objects (which is to say that they support the
+    interface of the standard library's BufferedIOBase class).
+    It differs from libraries like urllib and requests in that it supports
+    seek() (which moves an internal pointer), and that read() makes a request
+    with the Range header set. It also supports caching of contents using a
+    configurable block size, and will reuse TCP connections where possible.
+  dev_url: https://github.com/barneygale/httpio
+
+extra:
+  recipe-maintainers:
+    - avalentino
