@@ -1,5 +1,5 @@
 {% set name = "s1etad_tools" %}
-{% set version = "0.8.0" %}
+{% set version = "0.8.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: https://gitlab.com/s1-etad/sandbox-etad-slc-correction.git
-  git_rev: v0.8.0
+  git_rev: v{{ version }}
   # git_depth: 1 # (Defaults to -1/not shallow)
 
 build:
