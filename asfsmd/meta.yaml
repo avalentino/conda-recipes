@@ -1,0 +1,67 @@
+{% set name = "asfsmd" %}
+{% set version = "1.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 274a56cf0b0faeeb70b884753a177ae8e0f023a2171528031fb6fd004ebb13db
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python >=3.7
+    - pip
+  run:
+    - python >=3.7
+    - fsspec
+    - requests
+    - aiohttp
+    - importlib_metadata >=4.4
+    - asf_search
+    - tqdm
+    - argcomplete
+
+test:
+  imports:
+    - asfsmd
+  commands:
+    - asfsmd -h
+
+about:
+  home: https://github.com/avalentino/asfsmd
+  license: MIT
+  license_file: LICENSE
+  summary: ASF Sentinel-1 Metadata Download
+  description: |
+    Small Python tool (`asfsmd`) that allows to download XML files containing
+    Sentinel-1 products metadata from the ASF archive.
+
+    Sentinel-1 products are stored in the ASF arcive as ZIP files that are
+    quite large because they contain both the products annotations and the
+    binary image data.
+
+    The `asfsmd` tool is able to retrieve only the relatively samll annotation
+    files (in XML format) without downloading the entire ZIP archive.
+
+    `asfsmd` exploits Python packages like `fsspec` or `httpio` for reading HTTP 
+    resources as random-access file-like objects. In order to do it the remote 
+    server must support the `Range` header.
+
+    This approach allows to open the ZIP archive remotely, inspects contents, and
+    download only the pieces of data that are actually necessary to the user.
+
+    Performnces of this approach are quite poor but, in the specific case of
+    Sentinel-1 products, the entire process results to be faster than downloading
+    the entire ZIP archive and extracting only annotation files.
+  dev_url: https://github.com/avalentino/asfsmd
+
+extra:
+  recipe-maintainers:
+    - avalentino
