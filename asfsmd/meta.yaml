@@ -1,5 +1,5 @@
 {% set name = "asfsmd" %}
-{% set version = "1.2.0" %}
+{% set version = "1.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 274a56cf0b0faeeb70b884753a177ae8e0f023a2171528031fb6fd004ebb13db
+  sha256: 660ac9d753085f0ca364a1034c749769f426f5e719eb3c719f88c05bdaffd163
 
 build:
   noarch: python
