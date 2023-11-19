@@ -1,5 +1,5 @@
 {% set name = "asfsmd" %}
-{% set version = "1.4.0" %}
+{% set version = "1.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 660ac9d753085f0ca364a1034c749769f426f5e719eb3c719f88c05bdaffd163
+  sha256: c89798c25b888288c3ee9f367540d785fc4e1c68336d2ee8400bb14b5672e695
 
 build:
   noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
@@ -25,20 +25,22 @@ requirements:
     - aiohttp
     - importlib_metadata >=4.4
     - asf_search
+    - asf_search <6 # [py37]
     - tqdm
     - argcomplete
 
 test:
   imports:
     - asfsmd
+  requires:
+    - pip
   commands:
     - asfsmd -h
+    - pip check
 
 about:
   home: https://github.com/avalentino/asfsmd
-  license: MIT
-  license_file: LICENSE
-  summary: ASF Sentinel-1 Metadata Download
+  summary: 'ASF Sentinel-1 Metadata Download tool'
   description: |
     Small Python tool (`asfsmd`) that allows to download XML files containing
     Sentinel-1 products metadata from the ASF archive.
@@ -60,6 +62,9 @@ about:
     Performnces of this approach are quite poor but, in the specific case of
     Sentinel-1 products, the entire process results to be faster than downloading
     the entire ZIP archive and extracting only annotation files.
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
   dev_url: https://github.com/avalentino/asfsmd
 
 extra:
